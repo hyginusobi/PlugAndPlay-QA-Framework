@@ -29,8 +29,6 @@ This framework is designed for **NHS Trusts, SMEs, and public sector organisatio
 
 ---
 
-## 📂 Project Structure  
-
 ## 📂 Project Structure
 
 ```text
