@@ -18,17 +18,11 @@ jobs:
     - name: Install dependencies
       run: pip install -r automation/requirements.txt
 
-    - name: Install Chrome and ChromeDriver
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y wget unzip xvfb libxi6 libgconf-2-4 libnss3 libxss1 libasound2
-        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-        sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get -f install -y
-        CHROME_VERSION=$(google-chrome --version | awk '{print $3}')
-        wget https://chromedriver.storage.googleapis.com/${CHROME_VERSION}/chromedriver_linux64.zip
-        unzip chromedriver_linux64.zip
-        sudo mv chromedriver /usr/bin/chromedriver
-        sudo chmod +x /usr/bin/chromedriver
+    - name: Install Chrome
+      uses: browser-actions/setup-chrome@v1
+
+    - name: Install ChromeDriver
+      uses: nanasess/setup-chromedriver@v2
 
     - name: Run Accessibility Tests
       run: pytest -q automation/tests/test_accessibility.py
