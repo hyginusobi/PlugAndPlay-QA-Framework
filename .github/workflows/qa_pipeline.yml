@@ -1,0 +1,32 @@
+name: Plug & Play QA Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  qa-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: pip install -r automation/requirements.txt
+
+    - name: Run API Security Tests
+      run: pytest -q automation/tests/test_api_security.py
+
+    - name: Run Accessibility Tests
+      run: pytest -q automation/tests/test_accessibility.py
+
+    - name: Run UI Smoke Tests
+      run: pytest -q automation/tests/test_login.py

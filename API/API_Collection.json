@@ -1,0 +1,79 @@
+{
+  "info": {
+    "name": "Plug & Play QA Framework - API Collection",
+    "_postman_id": "c7b1f4e2-1234-4b8a-9a22-ppqa12345678",
+    "description": "Postman collection for testing OWASP API security scenarios in the Plug & Play QA Framework.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Payment - No Auth",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"amount\": 50\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/payments",
+          "host": ["{{base_url}}"],
+          "path": ["payments"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Payment - With Auth",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"amount\": 50\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/payments",
+          "host": ["{{base_url}}"],
+          "path": ["payments"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Payment by ID (Authorization Test)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/payments/99999",
+          "host": ["{{base_url}}"],
+          "path": ["payments", "99999"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "auth_token",
+      "value": "demo-token"
+    }
+  ]
+}
